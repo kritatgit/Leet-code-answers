@@ -1,0 +1,30 @@
+#Given a string s, return the longest palindromic substring in s.
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        count=0
+        j=0
+        max=0
+        result=''
+        if len(s)==1:
+            return s
+    
+        for i in range(0,len(s)-1):
+            k=j
+            while k < len(s):
+                flag,res=self.find_match(s[i:k+1],s)
+                if flag=='yes':
+                    if max<len(res):
+                        max=len(res)
+                        result=res
+                k+=1
+            j+=1    
+        if len(result)==0:
+            return None
+        else:
+            return result            
+    def find_match(self,s,st):
+        v=s[::-1]
+        if (v in st):
+            return 'yes',s
+        else:
+            return 'no'    
